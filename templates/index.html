@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+
+
+
+{% block content-head %}
+    <h5>项目列表</h5>
+{% endblock %}
+
+
+{% block content-body %}
+    {% if form_obj %}
+    {% else %}
+        <div>此处还没有项目，去 <a href="{% url 'add_it' %}">创建</a></div>
+    {% endif %}
+{% endblock %}
