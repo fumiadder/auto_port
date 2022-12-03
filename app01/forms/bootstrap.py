@@ -6,5 +6,6 @@ class BootStrapModelForm(object):
         for name, field in self.fields.items():
             if name in self.bootstrap_exclude_list:
                 continue
-            field.widget.attrs['class'] = 'form-control'
+            old_class = field.widget.attrs.get('class', '')
+            field.widget.attrs['class'] = '{} form-control'.format(old_class)
             field.widget.attrs['placeholder'] = f'请输入{field.label}'

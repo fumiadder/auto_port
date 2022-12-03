@@ -24,7 +24,7 @@ SECRET_KEY = 'bf93pxg^hm5$@jgo3s2v56$-d+i8nt6-sip-_!fx6m(&e@&*um'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -42,7 +42,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -110,7 +110,8 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+# USE_TZ = True
+USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
@@ -121,6 +122,19 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
+
+#  ############################# Django发邮件 #############################
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True  # 是否使用TLS安全传输协议(用于在两个通信应用程序之间提供保密性和数据完整性。)
+EMAIL_USE_SSL = False  # 是否使用SSL加密，qq企业邮箱要求使用
+EMAIL_HOST = 'smtp.163.com'  # 发送邮件的邮箱 的 SMTP服务器，这里用了163邮箱
+EMAIL_PORT = 25  # 发件箱的SMTP服务器端口
+EMAIL_HOST_USER = 'tingyuweilou@163.com'  # 发送邮件的邮箱地址
+EMAIL_HOST_PASSWORD = 'xxxxxx'  # 发送邮件的邮箱密码(这里使用的是授权码)
+EMAIL_TO_USER_LIST = ['xxxx@foxmail.com', 'xxx@qq.com']   # 此字段是可选的，用来配置收件人列表
+
+
+
 
 try:
     from .local_settings import *

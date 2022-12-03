@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+
+
+
+{% block content %}
+    <div class="card card-info">
+        <div class="card-header">
+            <h3 class="card-title">【{{ log_obj.log_sub_it.name }}】 的日志预览 </h3>
+
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
+                        class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove"><i
+                        class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="chart">
+                <div id="logs"
+                         style="min-height: 250px; height: 100%; max-width: 100%; ">
+
+                        {{ log_obj.log_report| safe }}
+                    </div>
+
+
+                <form action="" method="post">
+                    <div style="float: right">
+                        <a href="{% url 'logs_list' %}"><input type="button" value="返回" class="btn btn-info"></a>
+                       <input type="submit" value="下载" class="btn btn-success">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- /.card-body -->
+    </div>
+{% endblock %}

@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 import os
 import sys
+import threading
+from utils.CrontabHand import run
 
 if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "auto_port.settings")
@@ -19,4 +21,7 @@ if __name__ == "__main__":
                 "forget to activate a virtual environment?"
             )
         raise
+    # 起一个线程执行定时任务
+    # threading.Thread(target=run).start()
+
     execute_from_command_line(sys.argv)

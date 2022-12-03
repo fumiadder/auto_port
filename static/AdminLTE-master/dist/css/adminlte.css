@@ -4884,8 +4884,8 @@ input[type="button"].btn-block {
   text-decoration: none;
 }
 
-.breadcrumb-item.active {
-  color: #6c757d;
+.breadcrumb-item .active {
+  color: #0e84b5;
 }
 
 .pagination {

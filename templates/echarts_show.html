@@ -1,0 +1,236 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block nav %}
+    <ol class="breadcrumb float-sm-right">
+        <li class="breadcrumb-item"><a href="{% url 'index' %}">首页</a></li>
+        <li class="breadcrumb-item active">数据可视化</li>
+    </ol>
+{% endblock %}
+
+{% block content %}
+    <div class="card card-info">
+        <div class="card-header">
+            <h3 class="card-title">数据用例近一年总用例数走势图</h3>
+
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
+                        class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove"><i
+                        class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="chart">
+                <div id="LineRace"
+                     style="min-height: 250px; height: 400px; max-height: 450px; max-width: 100%; "></div>
+            </div>
+        </div>
+        <!-- /.card-body -->
+    </div>
+
+    <div class="row">
+        <!-- 数据用例通过情况 -->
+        <div class="col-md-6">
+            <div class="card card-info">
+                <div class="card-header">
+                    <h3 class="card-title">数据用例通过情况</h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
+                                class="fas fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove"><i
+                                class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="chart">
+                        <div id="PassPie"
+                             style="min-height: 250px; height: 400px; max-height: 450px; max-width: 100%; "></div>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+            </div>
+
+        </div>
+
+        <!-- 数据用例执行情况 -->
+        <div class="col-md-6">
+            <div class="card card-info">
+                <div class="card-header">
+                    <h3 class="card-title">数据用例执行情况</h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
+                                class="fas fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove"><i
+                                class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="chart">
+                        <div id="ExecutePie"
+                             style="min-height: 250px; height: 400px; max-height: 450px; max-width: 100%; "></div>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block js %}
+    <script src="{% static 'echarts.min.js' %}"></script>
+    <script>
+
+        // var ROOT_PATH = 'https://127.0.0.1/examples';
+        var ROOT_PATH = 'https://echarts.apache.org/examples';
+
+        // 用例通过/未通过情况   饼图
+        function PassPie(title, data) {
+            // 1. 实例化 echarts 对象
+            var chartDom = document.getElementById('PassPie');
+            var myChart = echarts.init(chartDom);
+            var option;
+
+            // 2， 配置参数
+            option = {
+                title: {
+                    text: '用例执行通过情况',
+                    subtext: 'Fake Data',
+                    left: 'center'
+                },
+                tooltip: {
+                    trigger: 'item',
+                    formatter: '{a} <br/>{b} : {c} ({d}%)'
+                },
+                legend: {
+                    bottom: 10,
+                    left: 'center',
+                    data: title
+                },
+                series: [
+                    {
+                        type: 'pie',
+                        radius: '65%',
+                        center: ['50%', '50%'],
+                        selectedMode: 'single',
+                        data: data,
+                        emphasis: {
+                            itemStyle: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        }
+                    }
+                ]
+            };
+
+            // 3. setoption
+            option && myChart.setOption(option);
+        }
+
+        // 用例执行/未执行情况   饼图
+        function ExecutePie(title, data) {
+            // 1. 实例化 echarts 对象
+            var chartDom = document.getElementById('ExecutePie');
+            var myChart = echarts.init(chartDom);
+            var option;
+
+            // 2， 配置参数
+            option = {
+                title: {
+                    text: '用例执行情况',
+                    subtext: 'Fake Data',
+                    left: 'center'
+                },
+                tooltip: {
+                    trigger: 'item',
+                    formatter: '{a} <br/>{b} : {c} ({d}%)'
+                },
+                legend: {
+                    bottom: 10,
+                    left: 'center',
+                    data: title
+                },
+                series: [
+                    {
+                        type: 'pie',
+                        radius: '65%',
+                        center: ['50%', '50%'],
+                        selectedMode: 'single',
+                        data: data,
+                        emphasis: {
+                            itemStyle: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        }
+                    }
+                ]
+            };
+
+            // 3. setoption
+            option && myChart.setOption(option);
+        }
+
+        // 用例近一年数据情况   折线图
+        function LineRace(title, data) {
+            var chartDom = document.getElementById('LineRace');
+            var myChart = echarts.init(chartDom);
+            var option;
+
+            option = {
+                xAxis: {
+                    type: 'category',
+                    boundaryGap: false,
+                    data: title
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [
+                    {
+                        data: data,
+                        type: 'line',
+                        areaStyle: {}
+                    }
+                ]
+            };
+
+            option && myChart.setOption(option);
+
+        }
+
+
+        function init() {
+            $.ajax({
+                'url': '{% url "echarts_show" %}',
+                'type': 'POST',
+                'data': '',
+                success: function (res) {
+                    // console.log(res);
+                    // 用例通过/未通过情况   饼图
+                    PassPie(res['data_dict']['pass_pie']['title'], res['data_dict']['pass_pie']['data']);
+                    // 用例执行/未执行情况   饼图
+                    ExecutePie(res['data_dict']['execute_pie']['title'], res['data_dict']['execute_pie']['data']);
+                    // 用例近一年数据情况   折线图
+                    LineRace(res['data_dict']['line_race']['title'], res['data_dict']['line_race']['data']);
+
+                }
+            })
+        }
+
+        init();
+    </script>
+{% endblock %}

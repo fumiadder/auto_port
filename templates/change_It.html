@@ -1,11 +1,20 @@
 {% extends 'layout.html' %}
 
-{% block content-head %}
-    <h5>添加项目</h5>
+{% block nav %}
+    <ol class="breadcrumb float-sm-right">
+        <li class="breadcrumb-item"><a href="{% url 'index' %}">首页</a></li>
+        {% if flag %}
+            <li class="breadcrumb-item active">编辑项目</li>
+
+        {% else %}
+            <li class="breadcrumb-item active">添加项目</li>
+
+        {% endif %}
+    </ol>
 {% endblock %}
 
 
-{% block content-body %}
+{% block content %}
     <form method="post" novalidate>
         {% csrf_token %}
         {% for foo in form %}
