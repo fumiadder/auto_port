@@ -5,26 +5,26 @@
 
 
 # # ---------------------- Chrome ---------------------
-# import time
-# # 1. 导入webdriver
-# from selenium import webdriver
-# # 2. 实例化指定浏览器的webdriver对象
-# # driver = webdriver.Chrome(executable_path=r'D:\video\s28-testing-day18-selenium\note\chromedriver.exe')
-# driver = webdriver.Chrome()
-# # 3. 访问指定的url，进行相关操作
-# try:
-#     driver.get(url='https://www.baidu.com')
-#
-#     driver.find_element_by_id('kw').send_keys('听雨危楼')
-#     driver.find_element_by_id('su').click()
-#
-#
-# # 4. 完事后，关闭浏览器
-# except Exception as e:
-#     print(e)
-# finally:
-#     time.sleep(2)
-#     driver.quit()
+import time
+# 1. 导入webdriver
+from selenium import webdriver
+# 2. 实例化指定浏览器的webdriver对象
+# driver = webdriver.Chrome(executable_path=r'D:\video\s28-testing-day18-selenium\note\chromedriver.exe')
+driver = webdriver.Chrome()
+# 3. 访问指定的url，进行相关操作
+try:
+    driver.get(url='https://www.baidu.com')
+
+    driver.find_element_by_id('kw').send_keys('听雨危楼')
+    driver.find_element_by_id('su').click()
+
+
+# 4. 完事后，关闭浏览器
+except Exception as e:
+    print(e)
+finally:
+    time.sleep(2)
+    driver.quit()
 
 
 
